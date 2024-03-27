@@ -40,5 +40,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://SungQ9.github.io/SungQ9.github.io"
+  "homepage": "http://SungQ9.github.io/SungQ9.github.io",
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
 }
