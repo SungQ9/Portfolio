@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/Portfolio/static/css/main.821318f6.css",
+    "main.js": "/Portfolio/static/js/main.20902a75.js",
+    "static/js/453.bb257cf5.chunk.js": "/Portfolio/static/js/453.bb257cf5.chunk.js",
+    "static/media/Trent-thum.png": "/Portfolio/static/media/Trent-thum.9ac160d44adf056eb762.png",
+    "static/media/React.png": "/Portfolio/static/media/React.6aa251274b716548fe0d.png",
+    "static/media/CSS.png": "/Portfolio/static/media/CSS.c3f8db4af350b0baed44.png",
+    "static/media/Linux-Dark.png": "/Portfolio/static/media/Linux-Dark.b606c22596fdfb672ed9.png",
+    "index.html": "/Portfolio/index.html",
+    "main.821318f6.css.map": "/Portfolio/static/css/main.821318f6.css.map",
+    "main.20902a75.js.map": "/Portfolio/static/js/main.20902a75.js.map",
+    "453.bb257cf5.chunk.js.map": "/Portfolio/static/js/453.bb257cf5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.821318f6.css",
+    "static/js/main.20902a75.js"
+  ]
+}
