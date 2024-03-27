@@ -1,6 +1,21 @@
+import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import gitlogoIcon from "../styles/img/GitLogo.png";
+import htmlIcon from "../styles/img/HTML.png";
+import cssIcon from "../styles/img/CSS.png";
+import javascriptIcon from "../styles/img/JavaScript.png";
+import reactIcon from "../styles/img/React.png";
+import mysqlIcon from "../styles/img/MySQL-Dark.png";
+import mariadbIcon from "../styles/img/MariaDB.png";
+import mongodbIcon from "../styles/img/MongoDB.png";
+import awsIcon from "../styles/img/AWS-Dark.png";
+import gitIcon from "../styles/img/Git.png";
+import figmaIcon from "../styles/img/Figma.png";
+import javaIcon from "../styles/img/Java.png";
+import pythonIcon from "../styles/img/Python.png";
+import springIcon from "../styles/img/Spring.png";
+import linuxIcon from "../styles/img/Linux-Dark.png";
 
 // 섹션 padding
 const Container = styled.section`
@@ -114,7 +129,7 @@ function About() {
           >
             <a href="https://github.com/SungQ9">
               <AboutImg>
-                <img src={require("../styles/img/GitLogo.png")} alt="CSS" />
+                <img src={gitlogoIcon} alt="CSS" />
               </AboutImg>
             </a>
           </div>
@@ -145,52 +160,40 @@ function About() {
               <Subheading>- FrontEnd</Subheading>
               <StackList>
                 <StackImg>
-                  <img src={require("../styles/img/HTML.png")} alt="Html" />
+                  <img src={htmlIcon} alt="Html" />
                 </StackImg>
                 <StackImg>
-                  <img src={require("../styles/img/CSS.png")} alt="CSS" />
+                  <img src={cssIcon} alt="CSS" />
                 </StackImg>
                 <StackImg>
-                  <img
-                    src={require("../styles/img/JavaScript.png")}
-                    alt="JavaScript"
-                  />
+                  <img src={javascriptIcon} alt="JavaScript" />
                 </StackImg>
                 <StackImg>
-                  <img src={require("../styles/img/React.png")} alt="React" />
+                  <img src={reactIcon} alt="React" />
                 </StackImg>
               </StackList>
               <Subheading>- DataBase</Subheading>
               <StackList>
                 <StackImg>
-                  <img
-                    src={require("../styles/img/MySQL-Dark.png")}
-                    alt="MySQL"
-                  />
+                  <img src={mysqlIcon} alt="MySQL" />
                 </StackImg>
                 <StackImg>
-                  <img
-                    src={require("../styles/img/MariaDB.png")}
-                    alt="MariaDB"
-                  />
+                  <img src={mariadbIcon} alt="MariaDB" />
                 </StackImg>
                 <StackImg>
-                  <img
-                    src={require("../styles/img/MongoDB.png")}
-                    alt="MongoDB"
-                  />
+                  <img src={mongodbIcon} alt="MongoDB" />
                 </StackImg>
               </StackList>
               <Subheading>- Etc</Subheading>
               <StackList>
                 <StackImg>
-                  <img src={require("../styles/img/AWS-Dark.png")} alt="AWS" />
+                  <img src={awsIcon} alt="AWS" />
                 </StackImg>
                 <StackImg>
-                  <img src={require("../styles/img/Git.png")} alt="Git" />
+                  <img src={gitIcon} alt="Git" />
                 </StackImg>
                 <StackImg>
-                  <img src={require("../styles/img/Figma.png")} alt="Figma" />
+                  <img src={figmaIcon} alt="Figma" />
                 </StackImg>
               </StackList>
             </StackGroup>
@@ -198,23 +201,20 @@ function About() {
               <Subheading>- BackEnd</Subheading>
               <StackList>
                 <StackImg>
-                  <img src={require("../styles/img/Java.png")} alt="Java" />
+                  <img src={javaIcon} alt="Java" />
                 </StackImg>
                 <StackImg>
-                  <img src={require("../styles/img/Python.png")} alt="Python" />
+                  <img src={pythonIcon} alt="Python" />
                 </StackImg>
                 <StackImg>
-                  <img src={require("../styles/img/Spring.png")} alt="Spring" />
+                  <img src={springIcon} alt="Spring" />
                 </StackImg>
                 <StackImg style={{ opacity: 0 }}></StackImg>
               </StackList>
               <Subheading>- OS</Subheading>
               <StackList>
                 <StackImg>
-                  <img
-                    src={require("../styles/img/Linux-Dark.png")}
-                    alt="LINUX"
-                  />
+                  <img src={linuxIcon} alt="LINUX" />
                 </StackImg>
               </StackList>
             </StackGroup>
