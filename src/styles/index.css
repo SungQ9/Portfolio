@@ -12,25 +12,35 @@ code {
     monospace;
 }
 
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* 브라우저의 전체 높이를 사용 */
+  overflow: hidden; /* 전체 페이지의 스크롤 제거 */
+}
+
 .main {
   display: flex;
   flex-direction: column;
+  height: 100vh; /* 뷰포트 높이를 100%로 설정하여 전체 화면을 차지하도록 함 */
   padding-inline: 2.5%;
 }
-
-.header {
-  border: 1px dotted #858484;
-  padding-inline: 2%;
-  margin-top: 1%;
+/* mobile */
+@media screen and (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
 }
-
-.contents {
-  border: 1px dotted #858484;
-  padding-inline: 2%;
-  height: 1024px;
+/* tablet */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .main {
+    flex-direction: column;
+  }
 }
-
-.footer {
-  border: 1px dotted #858484;
-  padding-inline: 2%;
+/* desktop */
+@media screen and (min-width: 1025px) {
+  .main {
+    flex-direction: column;
+  }
 }

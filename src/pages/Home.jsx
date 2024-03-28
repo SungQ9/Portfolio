@@ -37,7 +37,20 @@ const childVariants = {
   },
 };
 
-// 다음으로 이동하는 버튼을 스타일링한 컴포넌트
+const Text = styled(motion.h1)`
+  font-size: 4rem; // 기본 글자 크기
+  @media (max-width: 768px) {
+    font-size: 2rem; // 화면이 768px 이하일 때 글자 크기
+  }
+`;
+
+const SubText = styled(motion.h2)`
+  font-size: 3rem; // 기본 글자 크기
+  @media (max-width: 768px) {
+    font-size: 1.5rem; // 화면이 768px 이하일 때 글자 크기
+  }
+`;
+
 const NextButton = styled(motion.div)`
   display: flex;
   align-items: center;
@@ -45,10 +58,14 @@ const NextButton = styled(motion.div)`
   width: 100px;
   height: 50px;
   border: 1px solid #000;
-  font-size: 25px;
+  font-size: 1.5rem; // 버튼 내 글자 크기 조정
   font-weight: bold;
   cursor: pointer;
-  margin-top: 20px; // 버튼과 위 텍스트 사이 간격 추가
+  z-index: 10; /* 상위에 위치하도록 z-index 설정 */
+  @media (max-width: 768px) {
+    font-size: 0.8rem; /* 화면이 작을 때 폰트 사이즈 조정 */
+    min-width: 80px; /* 화면이 작을 때 버튼 너비 조정 */
+  }
 `;
 
 function Home() {
@@ -57,17 +74,18 @@ function Home() {
   return (
     <Container>
       <motion.div
-        className="Home"
+        className="home"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
+        style={{ padding: "1rem" }}
       >
-        <motion.h1 variants={childVariants} style={{ fontSize: "50px" }}>
+        <Text variants={childVariants} style={{ fontSize: "50px" }}>
           LEE SUNG KYU
-        </motion.h1>
-        <motion.h2 variants={childVariants} style={{ fontSize: "40px" }}>
+        </Text>
+        <SubText variants={childVariants} style={{ fontSize: "40px" }}>
           안녕하세요 이성규입니다
-        </motion.h2>
+        </SubText>
 
         <NextButton
           variants={childVariants}

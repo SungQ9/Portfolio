@@ -2,58 +2,23 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import ProjectDetail from "./ProjectDetail";
-import Trent from "../styles/img/Trent-thum.png";
+import projects from "../etc/projects";
 
-const projects = [
-  {
-    id: 1,
-    name: "T'Rent",
-    thumbnail: Trent,
-    description: "가전렌탈서비스 플랫폼",
-    technologies: ["React", "Node.js"],
-    gitUrl: "https://github.com/MidProject-Rental-Service/trent",
-    docUrl: "https://docs.google.com/document/d/project1",
-  },
-  {
-    id: 2,
-    name: "DR.Pick",
-    thumbnail: Trent,
-    description: "비대면(화상) 진료 및 통합 의료 서비스",
-    technologies: ["React", "Node.js"],
-    gitUrl: "https://github.com/finalProject-doctorPick",
-    docUrl: "https://docs.google.com/document/d/project1",
-  },
-  {
-    id: 3,
-    name: "T'Rent",
-    thumbnail: Trent,
-    description: "가전렌탈서비스 플랫폼",
-    technologies: ["React", "Node.js"],
-    gitUrl: "https://github.com/MidProject-Rental-Service/trent",
-    docUrl: "https://docs.google.com/document/d/project1",
-  },
-  {
-    id: 4,
-    name: "DR.Pick",
-    thumbnail: Trent,
-    description: "비대면(화상) 진료 및 통합 의료 서비스",
-    technologies: ["React", "Node.js"],
-    gitUrl: "https://github.com/finalProject-doctorPick",
-    docUrl: "https://docs.google.com/document/d/project1",
-  },
-];
-
-const ProjectContainer = styled(motion.div)`
+const Container = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 75px;
+  gap: 2rem;
   padding: 20px;
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 const ProjectCard = styled(motion.div)`
   border-radius: 5px;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 400px;
   background-size: cover;
   position: relative;
@@ -64,8 +29,15 @@ const ProjectCard = styled(motion.div)`
   &:hover .project-info {
     display: flex;
     flex-direction: column-reverse;
-    padding-bottom: 50px;
     align-items: center;
+    width: 24rem;
+    height: 24rem;
+  }
+  @media (max-width: 768px) {
+    width: calc(50% - 10px); // 태블릿과 모바일 화면에서는 카드 너비를 조정
+  }
+  @media (max-width: 480px) {
+    width: 100%; // 가장 작은 화면에서는 카드를 한 줄로 표시
   }
 `;
 
@@ -84,12 +56,36 @@ const ProjectInfo = styled.div`
 
 const Button = styled.button`
   margin-top: 10px;
+  margin-bottom: 30px;
   background-color: #000;
   color: #fff;
   height: 50px;
   width: 250px;
 `;
 
+const showHide = {
+  start: { opacity: 0 },
+  end: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.25,
+      duration: 0.5,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const showHideChild = {
+  start: { y: -5, opacity: 0 },
+  end: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeInOut",
+    },
+  },
+};
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -98,14 +94,20 @@ function Projects() {
   };
 
   return (
-    <div className="Project">
+    <motion.div
+      initial="start"
+      animate="end"
+      variants={showHide}
+      className="Project"
+    >
       <h2> Projects</h2>
-      <ProjectContainer>
+      <Container>
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
             style={{ backgroundImage: `url(${project.thumbnail})` }}
             whileHover={{ scale: 1.05 }}
+            variants={showHideChild}
           >
             <ProjectInfo className="project-info">
               <Button onClick={() => handleDetailClick(project)}>Detail</Button>
@@ -113,14 +115,14 @@ function Projects() {
             </ProjectInfo>
           </ProjectCard>
         ))}
-      </ProjectContainer>
+      </Container>
       {selectedProject && (
         <ProjectDetail
           project={selectedProject}
           onClose={() => setSelectedProject(null)}
         />
       )}
-    </div>
+    </motion.div>
   );
 }
 
