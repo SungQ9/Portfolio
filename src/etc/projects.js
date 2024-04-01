@@ -13,7 +13,6 @@ import Drpick3 from "../styles/img/Drpick-3.png";
 import Drpick4 from "../styles/img/Drpick-4.png";
 import Drpick5 from "../styles/img/Drpick-5.png";
 import Drpick6 from "../styles/img/Drpick-6.png";
-
 import Chat1 from "../styles/img/Chat-thum-1.png";
 import Chat2 from "../styles/img/Chat-thum-2.png";
 
@@ -21,6 +20,7 @@ const projects = [
   {
     id: 1,
     name: "T'Rent",
+    subname: "전자제품 렌탈 가격 비교 플랫폼 (팀프로젝트)",
     images: [
       TrentThumb,
       TrentThumb2,
@@ -31,7 +31,7 @@ const projects = [
       Trent5,
       Trent6,
     ],
-    description: "가전렌탈서비스 플랫폼",
+    description: "Spring Framework를 이용한 전자제품 렌탈 가격 비교 플랫폼 ",
     skills: ["Spring", "Mybatis", "JQuery", "JSP"],
     gitUrl: "https://github.com/MidProject-Rental-Service/trent",
     docUrl:
@@ -40,6 +40,7 @@ const projects = [
   {
     id: 2,
     name: "DR.Pick",
+    subname: "",
     images: [DrpickThumb, Drpick, Drpick2, Drpick3, Drpick4, Drpick5, Drpick6],
     description: "비대면(화상) 진료 및 통합 의료 서비스",
     skills: [
@@ -54,12 +55,13 @@ const projects = [
     ],
     gitUrl: "https://github.com/finalProject-doctorPick",
     docUrl:
-      "https://drive.google.com/file/d/1wz0V8fye8i3MOQbeVUIiIQS7_B0gYB8c/view?usp=sharing",
+      "https://drive.google.com/file/d/1TsMGeIa4UH-g79N2prRmwPH7U53jNths/view?usp=sharing",
     url: "https://sungq9.github.io/drpick/",
   },
   {
     id: 3,
     name: "CHAT-APP",
+    subname: "",
     images: [Chat1, Chat2],
     description: "가전렌탈서비스 플랫폼",
     skills: ["React", "Node.js"],
@@ -69,6 +71,7 @@ const projects = [
   {
     id: 4,
     name: "Zoom",
+    subname: "",
     images: [Trent, Drpick],
     description: "비대면(화상) 진료 및 통합 의료 서비스",
     skills: ["Node.js"],

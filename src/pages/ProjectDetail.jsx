@@ -6,6 +6,8 @@ import webIcon from "../styles/img/WebIcon.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { NextArrow } from "../etc/arrow";
+import { PrevArrow } from "../etc/arrow";
 
 // 슬라이더 설정
 const settings = {
@@ -14,6 +16,8 @@ const settings = {
   speed: 500, // 넘기는 속도
   slidesToShow: 1, // 한 번에 보여줄 슬라이드 수
   slidesToScroll: 1, // 한 번에 넘길 슬라이드 수
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />,
 };
 
 const Container = styled.div`
@@ -21,6 +25,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  height: 95%;
 `;
 const Background = styled.div`
   position: fixed;
@@ -28,6 +33,7 @@ const Background = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -40,13 +46,19 @@ const Content = styled.div`
   padding: 14px;
   border-radius: 10px;
   max-width: 90%;
-  width: 70rem;
-  height: 75rem;
+  width: 50rem;
+  height: 93vh;
+  max-height: 900px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  position: relative; // 절대 위치 설정
+  top: 50%; // 상단으로부터 50% 위치
+  left: 50%; // 왼쪽으로부터 50% 위치
+  transform: translate(-50%, -50%); // X와 Y축으로 -50% 이동하여 중앙 정렬
+
   @media (max-width: 768px) {
     width: 90%;
   }
@@ -55,7 +67,7 @@ const Content = styled.div`
 const CloseButton = styled.button`
   position: absolute;
   top: 0px;
-  right: -40px;
+  right: -60px;
   width: 50px;
   height: 50px;
   border: 2px solid #fff;
@@ -72,8 +84,8 @@ const CloseButton = styled.button`
 `;
 
 const ImageContainer = styled.div`
-  width: 900px;
-  height: 680px;
+  width: 600px;
+  height: 400px;
   align-items: center;
   overflow: hidden;
 `;
@@ -86,13 +98,14 @@ const SliderImageWrapper = styled.div`
 `;
 
 const DetailImage = styled.img`
-  max-width: 900px;
+  max-width: 100%;
   max-height: 100%;
   object-fit: contain;
 `;
 
 const Detail = styled.div`
   width: 90%;
+  margin-bottom: 5%;
 `;
 
 const SkillsContainer = styled.div`
@@ -110,10 +123,15 @@ const SkillItem = styled.h5`
   margin: 5px 0; // 위아래 마진 추가
 `;
 
+const LinkWrapper = styled.div`
+  display: flex;
+`;
+
 const LinkContainer = styled.div`
   display: flex;
   align-items: center;
   margin-top: 10px;
+  margin-right: 5%;
 `;
 
 const IconImage = styled.img`
@@ -126,8 +144,8 @@ function ProjectDetail({ project, onClose }) {
   return (
     <Background onClick={onClose}>
       <Container onClick={(e) => e.stopPropagation()}>
-        <CloseButton onClick={onClose}>X</CloseButton>
         <Content>
+          <CloseButton onClick={onClose}>X</CloseButton>
           <ImageContainer>
             <Slider {...settings}>
               {project.images.map((img, index) => (
@@ -159,11 +177,12 @@ function ProjectDetail({ project, onClose }) {
                 ))}
               </SkillsContainer>
             </div>
-            <div>
-              <h3>
-                <span>🚀</span>
-                Link
-              </h3>
+
+            <h3>
+              <span>🚀</span>
+              Link
+            </h3>
+            <LinkWrapper>
               {project.docUrl && (
                 <LinkContainer>
                   <IconImage src={slideIcon} alt="SlideIcon" />
@@ -189,8 +208,7 @@ function ProjectDetail({ project, onClose }) {
                   </a>
                 </LinkContainer>
               )}
-            </div>
-            <div>
+
               <LinkContainer>
                 <IconImage src={gitlogoIcon} alt="GitlogoIcon" />
                 <a
@@ -201,7 +219,7 @@ function ProjectDetail({ project, onClose }) {
                   GitHub
                 </a>
               </LinkContainer>
-            </div>
+            </LinkWrapper>
           </Detail>
         </Content>
       </Container>
