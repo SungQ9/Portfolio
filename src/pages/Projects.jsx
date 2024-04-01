@@ -9,6 +9,7 @@ const Container = styled(motion.div)`
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
+  margin-top: 5%;
   padding: 20px;
   @media (max-width: 768px) {
     gap: 1rem;
@@ -21,6 +22,7 @@ const ProjectCard = styled(motion.div)`
   max-width: 400px;
   height: 400px;
   background-size: cover;
+  background-position: center;
   position: relative;
   display: flex;
   justify-content: center;
@@ -100,12 +102,12 @@ function Projects() {
       variants={showHide}
       className="Project"
     >
-      <h2> Projects</h2>
+      <h2 style={{ marginLeft: "3%" }}> Projects</h2>
       <Container>
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
-            style={{ backgroundImage: `url(${project.thumbnail})` }}
+            style={{ backgroundImage: `url(${project.images[0]})` }}
             whileHover={{ scale: 1.05 }}
             variants={showHideChild}
           >

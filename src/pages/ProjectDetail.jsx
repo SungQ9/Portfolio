@@ -2,6 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import gitlogoIcon from "../styles/img/GitLogo.png";
 import slideIcon from "../styles/img/GoogleSlide.png";
+import webIcon from "../styles/img/WebIcon.png";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+// 슬라이더 설정
+const settings = {
+  dots: true, // 하단 점으로 페이지 넘김 표시
+  infinite: true, // 무한 루프
+  speed: 500, // 넘기는 속도
+  slidesToShow: 1, // 한 번에 보여줄 슬라이드 수
+  slidesToScroll: 1, // 한 번에 넘길 슬라이드 수
+};
 
 const Container = styled.div`
   display: flex;
@@ -27,8 +40,8 @@ const Content = styled.div`
   padding: 14px;
   border-radius: 10px;
   max-width: 90%;
-  width: 60rem;
-  height: 60rem;
+  width: 70rem;
+  height: 75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -59,25 +72,54 @@ const CloseButton = styled.button`
 `;
 
 const ImageContainer = styled.div`
-  width: 100%; // 컨테이너의 너비
-  max-width: 95%; // 최대 너비를 설정하여 이미지가 너무 크게 표시되지 않도록 함
-  height: 500px;
-  overflow: clip; // 이미지가 컨테이너를 벗어나지 않도록 설정
+  width: 900px;
+  height: 680px;
+  align-items: center;
+  overflow: hidden;
+`;
+
+const SliderImageWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const DetailImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover; // 컨테이너에 맞게 이미지를 조절
+  max-width: 900px;
+  max-height: 100%;
+  object-fit: contain;
 `;
 
 const Detail = styled.div`
   width: 90%;
 `;
 
+const SkillsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 10px; // 스킬 항목 사이의 간격
+  margin-top: 2px; // 상단 여백 조정
+`;
+
+const SkillItem = styled.h5`
+  flex: 1 1 20%; // 4개 항목이 한 줄에 들어갈 수 있도록 설정
+  max-width: calc(25% - 10px); // gap을 고려한 최대 너비 설정
+  height: auto; // 높이를 자동으로 설정하여 내용에 맞춤
+  margin: 5px 0; // 위아래 마진 추가
+`;
+
+const LinkContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+`;
+
 const IconImage = styled.img`
   width: 25px;
   height: 25px;
+  margin-right: 10px;
 `;
 
 function ProjectDetail({ project, onClose }) {
@@ -87,7 +129,13 @@ function ProjectDetail({ project, onClose }) {
         <CloseButton onClick={onClose}>X</CloseButton>
         <Content>
           <ImageContainer>
-            <DetailImage src={project.thumbnail} alt="Project thumbnail" />
+            <Slider {...settings}>
+              {project.images.map((img, index) => (
+                <SliderImageWrapper key={index}>
+                  <DetailImage src={img} alt={`Project img ${index + 1}`} />
+                </SliderImageWrapper>
+              ))}
+            </Slider>
           </ImageContainer>
           <Detail>
             <div className="title">
@@ -100,51 +148,59 @@ function ProjectDetail({ project, onClose }) {
               </h3>
               <h5>{project.description}</h5>
             </div>
-            <div className="skill">
+            <div className="skills">
               <h3>
                 <span>🔧</span>
                 Skill
               </h3>
-              {project.skills.map((skill, index) => (
-                <h5 key={index}>- {skill}</h5>
-              ))}
+              <SkillsContainer>
+                {project.skills.map((skill, index) => (
+                  <SkillItem key={index}>☑️{skill}</SkillItem>
+                ))}
+              </SkillsContainer>
             </div>
-            <div className="site">
-              <p>
-                <IconImage src={slideIcon} alt="SlideIcon" />
-                <a
-                  href={project.docUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Project Documentation
-                </a>
-              </p>
+            <div>
+              <h3>
+                <span>🚀</span>
+                Link
+              </h3>
+              {project.docUrl && (
+                <LinkContainer>
+                  <IconImage src={slideIcon} alt="SlideIcon" />
+                  <a
+                    href={project.docUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GoogleSlide
+                  </a>
+                </LinkContainer>
+              )}
               {project.url && (
-                <p>
-                  <span>🌐</span>
+                <LinkContainer>
+                  <IconImage src={webIcon} alt="SlideIcon" />
 
                   <a
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Visit Project
+                    Static Site
                   </a>
-                </p>
+                </LinkContainer>
               )}
             </div>
             <div>
-              <p>
+              <LinkContainer>
                 <IconImage src={gitlogoIcon} alt="GitlogoIcon" />
                 <a
                   href={project.gitUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  GitHub Repository
+                  GitHub
                 </a>
-              </p>
+              </LinkContainer>
             </div>
           </Detail>
         </Content>

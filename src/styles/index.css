@@ -16,14 +16,14 @@ body,
 html {
   margin: 0;
   padding: 0;
-  height: 100%; /* 브라우저의 전체 높이를 사용 */
-  overflow: hidden; /* 전체 페이지의 스크롤 제거 */
+  height: 100%;
+  overflow: hidden;
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* 뷰포트 높이를 100%로 설정하여 전체 화면을 차지하도록 함 */
+  height: 100vh;
   padding-inline: 2.5%;
 }
 /* mobile */

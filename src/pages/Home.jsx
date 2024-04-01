@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
-// 화면 중앙에 컨텐츠를 배치하기 위한 스타일드 컴포넌트
 const Container = styled.div`
   width: 100%;
   height: 100%;
