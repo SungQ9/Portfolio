@@ -101,6 +101,7 @@ function Projects() {
       animate="end"
       variants={showHide}
       className="Project"
+      style={{ marginTop: "10%" }}
     >
       <h2 style={{ marginLeft: "3%" }}> Projects</h2>
       <Container>

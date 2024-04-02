@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import gitlogoIcon from "../styles/img/GitLogo.png";
 import htmlIcon from "../styles/img/HTML.png";
 import cssIcon from "../styles/img/CSS.png";
@@ -75,14 +75,23 @@ const StackList = styled.div`
 
 // StackImg 컴포넌트 스타일링
 const StackImg = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 50px;
   height: 50px;
   margin-right: 5px;
+  margin-bottom: 25px;
   border-radius: 15px;
   box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.2);
   img {
     width: 100%;
     height: 100%;
+  }
+  .stack-name {
+    margin-top: 2px;
+    font-weight: 500;
+    font-size: 12px;
   }
 `;
 
@@ -111,16 +120,44 @@ export const showHideChild = {
   end: { y: 0, opacity: 1 }, // 끝날 때 원래 위치로 이동하며 투명도 1
 };
 function About() {
+  const controls = useAnimation();
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            controls.start("visible");
+          } else {
+            controls.start("hidden");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [controls]);
   return (
     <Container>
       <motion.div variants={showHide} initial="start" animate="end">
         <Category variants={showHideChild}>
           <Title>ABOUT ME</Title>
           <div className="text">
-            클릭해주셔서 감사합니다
-            <br />
-            저는 즐거운 개발자가 되고 싶은 이성규입니다. <br />
-            시간을 내어 제 포트폴리오를 봐주셔서 감사합니다.
+            저는 프론트엔드와 백엔드 기술을 모두 아우르는 웹 개발자가 되고자
+            하는 열정을 가지고 있습니다. <br />
+            사용자 경험을 강화하는 인터페이스 개발에 흥미가 있고, 동시에
+            안정적인 서버 사이드 애플리케이션 구축에 대한 이해에 깊은 관심이
+            있습니다
           </div>
 
           <div
@@ -160,40 +197,70 @@ function About() {
               <Subheading>- FrontEnd</Subheading>
               <StackList>
                 <StackImg>
-                  <img src={htmlIcon} alt="Html" />
+                  <div className="stack-icon">
+                    <img src={htmlIcon} alt="Html" />
+                  </div>
+                  <div className="stack-name">HTML</div>
                 </StackImg>
                 <StackImg>
-                  <img src={cssIcon} alt="CSS" />
+                  <div className="stack-icon">
+                    <img src={cssIcon} alt="CSS" />
+                  </div>
+                  <div className="stack-name">CSS</div>
                 </StackImg>
                 <StackImg>
-                  <img src={javascriptIcon} alt="JavaScript" />
+                  <div className="stack-icon">
+                    <img src={javascriptIcon} alt="JavaScript" />
+                  </div>
+                  <div className="stack-name">Javascript</div>
                 </StackImg>
                 <StackImg>
-                  <img src={reactIcon} alt="React" />
+                  <div className="stack-icon">
+                    <img src={reactIcon} alt="React" />
+                  </div>
+                  <div className="stack-name">React</div>
                 </StackImg>
               </StackList>
               <Subheading>- DataBase</Subheading>
               <StackList>
                 <StackImg>
-                  <img src={mysqlIcon} alt="MySQL" />
+                  <div className="stack-icon">
+                    <img src={mysqlIcon} alt="MySQL" />
+                  </div>
+                  <div className="stack-name">MySQL</div>
                 </StackImg>
                 <StackImg>
-                  <img src={mariadbIcon} alt="MariaDB" />
+                  <div className="stack-icon">
+                    <img src={mariadbIcon} alt="MariaDB" />
+                  </div>
+                  <div className="stack-name">MariaDB</div>
                 </StackImg>
                 <StackImg>
-                  <img src={mongodbIcon} alt="MongoDB" />
+                  <div className="stack-icon">
+                    <img src={mongodbIcon} alt="MongoDB" />
+                  </div>
+                  <div className="stack-name">MongoDB</div>
                 </StackImg>
               </StackList>
               <Subheading>- Etc</Subheading>
               <StackList>
                 <StackImg>
-                  <img src={awsIcon} alt="AWS" />
+                  <div className="stack-icon">
+                    <img src={awsIcon} alt="AWS" />
+                  </div>
+                  <div className="stack-name">AWS EC2</div>
                 </StackImg>
                 <StackImg>
-                  <img src={gitIcon} alt="Git" />
+                  <div className="stack-icon">
+                    <img src={gitIcon} alt="Git" />
+                  </div>
+                  <div className="stack-name">Git</div>
                 </StackImg>
                 <StackImg>
-                  <img src={figmaIcon} alt="Figma" />
+                  <div className="stack-icon">
+                    <img src={figmaIcon} alt="Figma" />
+                  </div>
+                  <div className="stack-name">Figma</div>
                 </StackImg>
               </StackList>
             </StackGroup>
@@ -201,20 +268,32 @@ function About() {
               <Subheading>- BackEnd</Subheading>
               <StackList>
                 <StackImg>
-                  <img src={javaIcon} alt="Java" />
+                  <div className="stack-icon">
+                    <img src={javaIcon} alt="Java" />
+                  </div>
+                  <div className="stack-name">Java</div>
                 </StackImg>
                 <StackImg>
-                  <img src={pythonIcon} alt="Python" />
+                  <div className="stack-icon">
+                    <img src={pythonIcon} alt="Python" />
+                  </div>
+                  <div className="stack-name">Python</div>
                 </StackImg>
                 <StackImg>
-                  <img src={springIcon} alt="Spring" />
+                  <div className="stack-icon">
+                    <img src={springIcon} alt="Spring" />
+                  </div>
+                  <div className="stack-name">Spring</div>
                 </StackImg>
                 <StackImg style={{ opacity: 0 }}></StackImg>
               </StackList>
               <Subheading>- OS</Subheading>
               <StackList>
                 <StackImg>
-                  <img src={linuxIcon} alt="LINUX" />
+                  <div className="stack-icon">
+                    <img src={linuxIcon} alt="LINUX" />
+                  </div>
+                  <div className="stack-name">Linux</div>
                 </StackImg>
               </StackList>
             </StackGroup>

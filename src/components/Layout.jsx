@@ -1,46 +1,28 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import Section from "./Section";
+import Home from "../pages/Home";
+import About from "../pages/About";
+import Projects from "../pages/Projects";
 
-const Container = styled.main`
-  position: absolute;
-  top: 70px;
-  bottom: 70px;
-  left: 70px;
-  right: 70px;
-  overflow: hidden;
-  & > div {
-    height: 100%;
-    display: flex;
-  }
-  @media ${(props) => props.theme.mobile} {
-    position: static;
-  }
-`;
-
-const Contents = styled.div`
-  flex: 1;
-  width: calc(100% - 35%);
-  background-color: ${(props) => props.theme.bgColor};
-  margin-bottom: 10%;
+const Container = styled.div`
+  scroll-snap-type: y proximity;
+  height: 100vh;
   overflow-y: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  @media ${(props) => props.theme.mobile} {
-    width: 100%;
-    height: 100vh;
-  }
 `;
 
 function Layout() {
   return (
     <Container>
-      <div>
-        <Contents>
-          <Outlet />
-        </Contents>
-      </div>
+      <Section>
+        <Home />
+      </Section>
+      <Section>
+        <About />
+      </Section>
+      <Section>
+        <Projects />
+      </Section>
     </Container>
   );
 }

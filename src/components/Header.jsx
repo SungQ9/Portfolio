@@ -1,7 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
-import { motion } from "framer-motion";
 
 const Container = styled.div`
   display: flex;
@@ -30,7 +28,7 @@ const Navigator = styled.nav`
   text-align: center;
 `;
 
-const NavLink = styled(motion.p)`
+const NavLink = styled.div`
   font-size: 1rem; /* 링크 폰트 사이즈 */
   font-weight: 500;
   margin: 0 0.35rem; /* 좌우 마진 */
@@ -49,15 +47,20 @@ const NavLink = styled(motion.p)`
 `;
 
 function Header() {
-  const navigate = useNavigate();
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <Container>
-      <Title onClick={() => navigate("/")}>SungQ</Title>
+      <Title onClick={() => scrollToSection("home")}>SungQ</Title>
       <Navigator>
-        <NavLink onClick={() => navigate("/")}>Home</NavLink>
-        <NavLink onClick={() => navigate("/about")}>About</NavLink>
-        <NavLink onClick={() => navigate("/projects")}>Projects</NavLink>
+        <NavLink onClick={() => scrollToSection("home")}>Home</NavLink>
+        <NavLink onClick={() => scrollToSection("about")}>About</NavLink>
+        <NavLink onClick={() => scrollToSection("projects")}>Projects</NavLink>
       </Navigator>
     </Container>
   );

@@ -1,11 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,8 +67,12 @@ const NextButton = styled(motion.div)`
 `;
 
 function Home() {
-  const navigate = useNavigate(); // useNavigate 훅을 사용하여 페이지 이동
-
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <Container>
       <motion.div
@@ -90,7 +93,7 @@ function Home() {
           variants={childVariants}
           whileHover={{ scale: 1.1 }} // 호버 시 버튼이 커지는 효과 추가
           whileTap={{ scale: 0.95 }} // 탭(클릭) 시 버튼이 작아지는 효과 추가
-          onClick={() => navigate("/about")} // 클릭 시 /about 경로로 이동
+          onClick={() => scrollToSection("about")} // 클릭 시 /about 경로로 이동
         >
           Next
         </NextButton>
