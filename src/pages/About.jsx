@@ -110,15 +110,23 @@ const Title = styled.h4`
 
 // framer-motion을 이용한 애니메이션 효과 설정
 export const showHide = {
-  start: { opacity: 0 }, // 시작 시 투명도 0
-  end: { opacity: 1, transition: { staggerChildren: 0.5 } }, // 끝날 때 투명도 1 및 자식 요소에 대한 stagger 애니메이션 적용
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.5 }, // 자식 컴포넌트들 사이에 stagger 적용
+  },
 };
 
-// 자식 요소의 애니메이션 효과 설정
+// Category 내부 요소에 적용될 애니메이션
 export const showHideChild = {
-  start: { y: -5, opacity: 0 }, // 시작 시 위로 이동하며 투명도 0
-  end: { y: 0, opacity: 1 }, // 끝날 때 원래 위치로 이동하며 투명도 1
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
 };
+
 function About() {
   const controls = useAnimation();
   const ref = useRef(null);
@@ -148,8 +156,8 @@ function About() {
     };
   }, [controls]);
   return (
-    <Container>
-      <motion.div variants={showHide} initial="start" animate="end">
+    <Container id="about">
+      <motion.div variants={showHide} initial="hidden" animate="visible">
         <Category variants={showHideChild}>
           <Title>ABOUT ME</Title>
           <div className="text">

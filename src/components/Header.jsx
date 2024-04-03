@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useTheme } from "../context/ThemeContext";
 
 const Container = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ const Container = styled.div`
   -webkit-box-align: center;
   margin: 0px auto;
   padding: 0 2.5%; /* 양 옆 여백 조정 */
-  width: 93%;
+  width: 95%;
   height: 70px; /* 헤더 높이 설정 */
   background-color: #f8f9fa; /* 헤더 배경색 설정 */
   border-bottom: 1px solid #000;
@@ -51,11 +52,16 @@ function Header() {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
+      console.log(`Scrolling to ${sectionId}`); // 디버깅을 위한 로그
+    } else {
+      console.log(`Section with ID ${sectionId} not found.`); // 섹션을 찾지 못한 경우 로그
     }
   };
 
+  const { theme } = useTheme();
+
   return (
-    <Container>
+    <Container style={{ background: theme.backColor, color: theme.textColor }}>
       <Title onClick={() => scrollToSection("home")}>SungQ</Title>
       <Navigator>
         <NavLink onClick={() => scrollToSection("home")}>Home</NavLink>

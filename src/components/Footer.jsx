@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useTheme } from "../context/ThemeContext";
 
 const Container = styled.div`
   display: flex;
@@ -27,9 +28,12 @@ const Text = styled.h4`
 `;
 
 function Footer() {
+  const { theme } = useTheme();
   return (
     <div className="footer">
-      <Container>
+      <Container
+        style={{ background: theme.backColor, color: theme.textColor }}
+      >
         <Text>Copyright © 2024</Text>
         <Text>Web Developer Protfolio by SungQ</Text>
       </Container>

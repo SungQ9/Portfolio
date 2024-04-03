@@ -83,6 +83,13 @@ const CloseButton = styled.button`
   align-items: center;
 `;
 
+const Title = styled.div`
+  margin: 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const ImageContainer = styled.div`
   width: 600px;
   height: 400px;
@@ -108,17 +115,26 @@ const Detail = styled.div`
   margin-bottom: 5%;
 `;
 
+const DiscriptionContainer = styled.div`
+  display: columns;
+`;
+
+const DiscriptText = styled.h5`
+  margin: 2px 0;
+  font-weight: 500;
+`;
+
 const SkillsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
-  gap: 10px; // 스킬 항목 사이의 간격
+  gap: 1px; // 스킬 항목 사이의 간격
   margin-top: 2px; // 상단 여백 조정
 `;
 
 const SkillItem = styled.h5`
   flex: 1 1 20%; // 4개 항목이 한 줄에 들어갈 수 있도록 설정
-  max-width: calc(25% - 10px); // gap을 고려한 최대 너비 설정
+  max-width: 25%; // gap을 고려한 최대 너비 설정
   height: auto; // 높이를 자동으로 설정하여 내용에 맞춤
   margin: 5px 0; // 위아래 마진 추가
 `;
@@ -146,6 +162,10 @@ function ProjectDetail({ project, onClose }) {
       <Container onClick={(e) => e.stopPropagation()}>
         <Content>
           <CloseButton onClick={onClose}>X</CloseButton>
+          <Title>
+            <h3 style={{ margin: "0 0 15px 0" }}>{project.name}</h3>
+            <h5 style={{ margin: 0 }}>{project.subname}</h5>
+          </Title>
           <ImageContainer>
             <Slider {...settings}>
               {project.images.map((img, index) => (
@@ -156,16 +176,15 @@ function ProjectDetail({ project, onClose }) {
             </Slider>
           </ImageContainer>
           <Detail>
-            <div className="title">
-              <h2>{project.name}</h2>
-            </div>
-            <div className="discription">
+            <DiscriptionContainer>
               <h3>
                 <span>📄</span>
                 Description
               </h3>
-              <h5>{project.description}</h5>
-            </div>
+              {project.description.map((text, index) => (
+                <DiscriptText key={index}>{text}</DiscriptText>
+              ))}
+            </DiscriptionContainer>
             <div className="skills">
               <h3>
                 <span>🔧</span>

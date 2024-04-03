@@ -1,15 +1,12 @@
 import React from "react";
-import Header from "./components/Header.jsx";
-import Layout from "./components/Layout.jsx";
-import Footer from "./components/Footer.jsx";
+import Wrapper from "./components/Wrapper.jsx";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 function App() {
   return (
-    <div className="main">
-      <Header />
-      <Layout />
-      <Footer />
-    </div>
+    <ThemeProvider>
+      <Wrapper />
+    </ThemeProvider>
   );
 }
 

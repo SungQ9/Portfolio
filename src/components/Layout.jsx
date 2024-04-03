@@ -6,21 +6,21 @@ import About from "../pages/About";
 import Projects from "../pages/Projects";
 
 const Container = styled.div`
-  scroll-snap-type: y proximity;
-  height: 100vh;
-  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 `;
 
 function Layout() {
   return (
     <Container>
-      <Section>
+      <Section id="home">
         <Home />
       </Section>
-      <Section>
+      <Section id="about">
         <About />
       </Section>
-      <Section>
+      <Section id="projects">
         <Projects />
       </Section>
     </Container>

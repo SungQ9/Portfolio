@@ -36,6 +36,10 @@ const childVariants = {
 };
 
 const Text = styled(motion.h1)`
+  display: flex;
+  justify-content: center;
+  background: #000;
+  color: #fff;
   font-size: 4rem; // 기본 글자 크기
   @media (max-width: 768px) {
     font-size: 2rem; // 화면이 768px 이하일 때 글자 크기
@@ -74,7 +78,7 @@ function Home() {
     }
   };
   return (
-    <Container>
+    <Container id="home">
       <motion.div
         className="home"
         variants={containerVariants}
@@ -86,7 +90,7 @@ function Home() {
           LEE SUNG KYU
         </Text>
         <SubText variants={childVariants} style={{ fontSize: "40px" }}>
-          안녕하세요 이성규입니다
+          도전하는 개발자 이성규 입니다
         </SubText>
 
         <NextButton

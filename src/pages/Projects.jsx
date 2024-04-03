@@ -97,13 +97,14 @@ function Projects() {
 
   return (
     <motion.div
+      id="projects"
       initial="start"
       animate="end"
       variants={showHide}
       className="Project"
-      style={{ marginTop: "10%" }}
+      style={{ paddingTop: "10%", background: "#fff" }}
     >
-      <h2 style={{ marginLeft: "3%" }}> Projects</h2>
+      <h2 style={{ margin: "0 0 0 3%", paddingTop: "2%" }}> Projects</h2>
       <Container>
         {projects.map((project) => (
           <ProjectCard

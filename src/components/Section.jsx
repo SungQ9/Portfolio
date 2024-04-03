@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useTheme } from "../context/ThemeContext";
 import { motion, useAnimation } from "framer-motion";
 import styled from "styled-components";
 
@@ -8,23 +9,26 @@ const Styled = styled(motion.div)`
   // 여기에 추가적인 스타일을 정의할 수 있습니다.
 `;
 
-function Section({ children }) {
+function Section({ children, id }) {
   const controls = useAnimation();
   const ref = useRef(null);
+  const { updateTheme } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           controls.start("visible");
+          console.log("id=", id);
+          updateTheme(id);
         } else {
           // 뷰포트에서 벗어났을 때 애니메이션을 hidden 상태로 설정
           controls.start("hidden");
         }
       },
       {
-        rootMargin: "0px",
-        threshold: 0.1,
+        rootMargin: "10px 0px",
+        threshold: 0.3,
       }
     );
 
@@ -37,7 +41,7 @@ function Section({ children }) {
         observer.unobserve(ref.current);
       }
     };
-  }, [controls]);
+  }, [controls, id]);
 
   return (
     <Styled
@@ -45,8 +49,8 @@ function Section({ children }) {
       animate={controls}
       initial="hidden"
       variants={{
-        visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-        hidden: { opacity: 0, scale: 1 },
+        visible: { opacity: 1, scale: 1, transition: { duration: 1.0 } },
+        hidden: { opacity: 0, scale: 1, transition: { duration: 0.5 } },
       }}
     >
       {children}
