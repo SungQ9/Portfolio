@@ -38,8 +38,8 @@ const childVariants = {
 const Text = styled(motion.h1)`
   display: flex;
   justify-content: center;
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
   font-size: 4rem; // 기본 글자 크기
   @media (max-width: 768px) {
     font-size: 2rem; // 화면이 768px 이하일 때 글자 크기
@@ -59,7 +59,7 @@ const NextButton = styled(motion.div)`
   justify-content: center;
   width: 100px;
   height: 50px;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   font-size: 1.5rem; // 버튼 내 글자 크기 조정
   font-weight: bold;
   cursor: pointer;
