@@ -17,6 +17,9 @@ import Chat1 from "../styles/img/Chat-thum-1.png";
 import Chat2 from "../styles/img/Chat-thum-2.png";
 import SocketIOChat from "../styles/img/SocketIOChat.png";
 import SocketIOChat2 from "../styles/img/SocketIOChat-2.png";
+import Portfolio from "../styles/img/Portfolio-1.png";
+import Portfolio2 from "../styles/img/Portfolio-2.png";
+import Portfolio3 from "../styles/img/Portfolio-3.png";
 
 const projects = [
   {
@@ -100,7 +103,7 @@ const projects = [
     id: 5,
     name: "Portfolio",
     subname: "",
-    images: [SocketIOChat, SocketIOChat2],
+    images: [Portfolio, Portfolio2, Portfolio3],
     description: [
       "🏗️ 일정 - 24.03.25 ~ 24.04.03 ",
       "👥 인원 - 1명",
