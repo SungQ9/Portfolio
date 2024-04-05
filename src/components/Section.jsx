@@ -4,7 +4,7 @@ import { motion, useAnimation } from "framer-motion";
 import styled from "styled-components";
 
 const Styled = styled(motion.div)`
-  min-height: 100vh; // 섹션의 높이를 뷰포트 높이의 100%로 설정합니다.
+  min-height: 90vh; // 섹션의 높이를 뷰포트 높이의 100%로 설정합니다.
   width: 100%; // 섹션의 너비를 100%로 설정합니다.
   // 여기에 추가적인 스타일을 정의할 수 있습니다.
 `;

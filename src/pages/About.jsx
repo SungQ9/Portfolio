@@ -95,7 +95,7 @@ const Subheading = styled.h3`
   letter-spacing: 3px;
   font-weight: 700;
   padding-left: 10px;
-  padding-bottom: 2%;
+  padding-bottom: 1%;
   border-bottom: 1px solid #000;
   width: 400px;
 `;
