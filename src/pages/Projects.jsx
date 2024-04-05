@@ -50,7 +50,6 @@ const Title = styled.div`
   font-weight: 600;
   font-size: 20px;
   margin: 0 0 0 3%;
-
   background-color: #000;
   color: #fff;
 `;
@@ -118,7 +117,7 @@ function Projects({ isVisible }) {
       variants={containerVariants}
       initial="hidden"
       animate={isVisible ? "visible" : "hidden"}
-      style={{ paddingTop: "10%", background: "#fff" }}
+      style={{ background: "#fff" }}
     >
       <Title> Projects</Title>
       <Container variants={childVariants}>

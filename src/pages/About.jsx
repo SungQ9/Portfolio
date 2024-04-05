@@ -33,7 +33,7 @@ const childVariants = {
 // styled-components와 framer-motion을 사용하여 Category 컴포넌트 스타일링
 const Category = styled(motion.div)`
   color: #333;
-  margin-bottom: 50px;
+  margin-bottom: 7%;
   .text {
     line-height: 25px;
   }
