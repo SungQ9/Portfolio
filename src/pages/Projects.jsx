@@ -9,11 +9,50 @@ const Container = styled(motion.div)`
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  margin-top: 5%;
+  margin-top: 2%;
   padding: 20px;
   @media (max-width: 768px) {
     gap: 1rem;
   }
+`;
+
+// 컨테이너의 애니메이션 효과를 정의한 객체
+const containerVariants = {
+  hidden: { opacity: 0, y: 20 }, // 시작 위치를 조금 아래에서 시작하도록 수정
+  visible: {
+    opacity: 1,
+    y: 0, // 최종 위치는 원래 위치
+    transition: {
+      staggerChildren: 0.25, // 자식 컴포넌트 간에 애니메이션 간격 설정
+      when: "beforeChildren", // 컨테이너 애니메이션이 자식들 애니메이션 전에 시작
+    },
+  },
+};
+
+// 자식 컴포넌트의 애니메이션 효과를 정의한 객체
+const childVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.5, // 자식 컴포넌트 애니메이션 지속 시간 설정
+    },
+  },
+};
+
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+  border: 1px solid #000;
+  border-radius: 15px;
+  width: 150px;
+  height: 30px;
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0 0 0 3%;
+
+  background-color: #000;
+  color: #fff;
 `;
 
 const ProjectCard = styled(motion.div)`
@@ -65,30 +104,7 @@ const Button = styled.button`
   width: 250px;
 `;
 
-const showHide = {
-  start: { opacity: 0 },
-  end: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.25,
-      duration: 0.5,
-      ease: "easeInOut",
-    },
-  },
-};
-
-const showHideChild = {
-  start: { y: -5, opacity: 0 },
-  end: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeInOut",
-    },
-  },
-};
-function Projects() {
+function Projects({ isVisible }) {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const handleDetailClick = (project) => {
@@ -98,20 +114,19 @@ function Projects() {
   return (
     <motion.div
       id="projects"
-      initial="start"
-      animate="end"
-      variants={showHide}
       className="Project"
+      variants={containerVariants}
+      initial="hidden"
+      animate={isVisible ? "visible" : "hidden"}
       style={{ paddingTop: "10%", background: "#fff" }}
     >
-      <h2 style={{ margin: "0 0 0 3%", paddingTop: "2%" }}> Projects</h2>
-      <Container>
+      <Title> Projects</Title>
+      <Container variants={childVariants}>
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
             style={{ backgroundImage: `url(${project.images[0]})` }}
             whileHover={{ scale: 1.05 }}
-            variants={showHideChild}
           >
             <ProjectInfo className="project-info">
               <Button onClick={() => handleDetailClick(project)}>Detail</Button>

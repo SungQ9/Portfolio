@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { motion, useAnimation } from "framer-motion";
 import styled from "styled-components";
@@ -13,17 +13,20 @@ function Section({ children, id }) {
   const controls = useAnimation();
   const ref = useRef(null);
   const { updateTheme } = useTheme();
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           controls.start("visible");
+          setIsVisible(true);
           console.log("id=", id);
           updateTheme(id);
         } else {
           // 뷰포트에서 벗어났을 때 애니메이션을 hidden 상태로 설정
           controls.start("hidden");
+          setIsVisible(false);
         }
       },
       {
@@ -41,7 +44,11 @@ function Section({ children, id }) {
         observer.unobserve(ref.current);
       }
     };
-  }, [controls, id]);
+  }, []);
+
+  const childrenWithProps = React.Children.map(children, (child) =>
+    React.cloneElement(child, { isVisible })
+  );
 
   return (
     <Styled
@@ -53,7 +60,7 @@ function Section({ children, id }) {
         hidden: { opacity: 0, scale: 1, transition: { duration: 0.5 } },
       }}
     >
-      {children}
+      {childrenWithProps}
     </Styled>
   );
 }

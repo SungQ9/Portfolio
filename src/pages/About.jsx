@@ -1,26 +1,34 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import gitlogoIcon from "../styles/img/GitLogo.png";
-import htmlIcon from "../styles/img/HTML.png";
-import cssIcon from "../styles/img/CSS.png";
-import javascriptIcon from "../styles/img/JavaScript.png";
-import reactIcon from "../styles/img/React.png";
-import mysqlIcon from "../styles/img/MySQL-Dark.png";
-import mariadbIcon from "../styles/img/MariaDB.png";
-import mongodbIcon from "../styles/img/MongoDB.png";
-import awsIcon from "../styles/img/AWS-Dark.png";
-import gitIcon from "../styles/img/Git.png";
-import figmaIcon from "../styles/img/Figma.png";
-import javaIcon from "../styles/img/Java.png";
-import pythonIcon from "../styles/img/Python.png";
-import springIcon from "../styles/img/Spring.png";
-import linuxIcon from "../styles/img/Linux-Dark.png";
 
 // 섹션 padding
 const Container = styled.section`
-  padding: 5%;
+  padding: 4%;
 `;
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 20 }, // 시작 위치를 조금 아래에서 시작하도록 수정
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.25, // 자식 컴포넌트 간에 애니메이션 간격 설정
+      when: "beforeChildren", // 컨테이너 애니메이션이 자식들 애니메이션 전에 시작
+    },
+  },
+};
+
+const childVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.5, // 자식 컴포넌트 애니메이션 지속 시간 설정
+    },
+  },
+};
 
 // styled-components와 framer-motion을 사용하여 Category 컴포넌트 스타일링
 const Category = styled(motion.div)`
@@ -66,99 +74,57 @@ const StackGroup = styled.div`
 // StackList 컴포넌트 스타일링
 const StackList = styled.div`
   display: grid;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  grid-template-columns: repeat(3, 60px);
-  gap: 10px;
-  padding-left: 5px;
+  padding-bottom: 15px;
+  grid-template-columns: repeat(4, 100px);
+  gap: 5px;
+  align-items: center;
+  justify-items: start;
 `;
 
-// StackImg 컴포넌트 스타일링
-const StackImg = styled.div`
+const StackName = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  margin-right: 5px;
-  margin-bottom: 25px;
-  border-radius: 15px;
-  box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.2);
-  img {
-    width: 100%;
-    height: 100%;
-  }
-  .stack-name {
-    margin-top: 2px;
-    font-weight: 500;
-    font-size: 12px;
-  }
+  justify-content: flex-start;
+  width: 80px;
+  margin-left: 10px;
+  font-weight: 500;
 `;
 
 // Subheading 컴포넌트 스타일링
 const Subheading = styled.h3`
   text-transform: capitalize;
   letter-spacing: 3px;
-  font-weight: 600;
+  font-weight: 700;
   padding-left: 10px;
+  padding-bottom: 2%;
+  border-bottom: 1px solid #000;
+  width: 400px;
 `;
 
 // 타이틀 컴포넌트 스타일링
 const Title = styled.h4`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 30px;
   margin-bottom: 20px; // 타이틀과 내용 사이의 여백
+  border: 1px solid #000;
+  border-radius: 15px;
+  background-color: #000;
+  color: #fff;
 `;
 
-// framer-motion을 이용한 애니메이션 효과 설정
-export const showHide = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.5 }, // 자식 컴포넌트들 사이에 stagger 적용
-  },
-};
-
-// Category 내부 요소에 적용될 애니메이션
-export const showHideChild = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 },
-  },
-};
-
-function About() {
-  const controls = useAnimation();
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            controls.start("visible");
-          } else {
-            controls.start("hidden");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [controls]);
+function About({ isVisible }) {
   return (
     <Container id="about">
-      <motion.div variants={showHide} initial="hidden" animate="visible">
-        <Category variants={showHideChild}>
+      <motion.div
+        className="about"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isVisible ? "visible" : "hidden"}
+        style={{ padding: "1rem" }}
+      >
+        <Category variants={childVariants}>
           <Title>ABOUT ME</Title>
           <div className="text">
             저는 프론트엔드와 백엔드 기술을 모두 아우르는 웹 개발자가 되고자
@@ -167,7 +133,6 @@ function About() {
             안정적인 서버 사이드 애플리케이션 구축에 대한 이해에 깊은 관심이
             있습니다
           </div>
-
           <div
             className="link"
             style={{ display: "flex", marginTop: "15px", width: "100px" }}
@@ -180,7 +145,7 @@ function About() {
           </div>
         </Category>
 
-        <Category variants={showHideChild}>
+        <Category variants={childVariants}>
           <Title>EDUCATION</Title>
           <ul>
             <li>2024.02 ~ 한국방송통신대학교 (컴퓨터과학과) 재학中</li>
@@ -198,111 +163,40 @@ function About() {
           </ul>
         </Category>
 
-        <Category variants={showHideChild}>
+        <Category variants={childVariants}>
           <Title>STACKS</Title>
           <StackSection>
             <StackGroup>
-              <Subheading>- FrontEnd</Subheading>
+              <Subheading>FE</Subheading>
               <StackList>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={htmlIcon} alt="Html" />
-                  </div>
-                  <div className="stack-name">HTML</div>
-                </StackImg>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={cssIcon} alt="CSS" />
-                  </div>
-                  <div className="stack-name">CSS</div>
-                </StackImg>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={javascriptIcon} alt="JavaScript" />
-                  </div>
-                  <div className="stack-name">Javascript</div>
-                </StackImg>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={reactIcon} alt="React" />
-                  </div>
-                  <div className="stack-name">React</div>
-                </StackImg>
+                <StackName>HTML5</StackName>
+                <StackName>CSS3</StackName>
+                <StackName>Javascript</StackName>
+                <StackName>React</StackName>
               </StackList>
-              <Subheading>- DataBase</Subheading>
+              <Subheading>DB</Subheading>
               <StackList>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={mysqlIcon} alt="MySQL" />
-                  </div>
-                  <div className="stack-name">MySQL</div>
-                </StackImg>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={mariadbIcon} alt="MariaDB" />
-                  </div>
-                  <div className="stack-name">MariaDB</div>
-                </StackImg>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={mongodbIcon} alt="MongoDB" />
-                  </div>
-                  <div className="stack-name">MongoDB</div>
-                </StackImg>
+                <StackName>MySQL</StackName>
+                <StackName>MariaDB</StackName>
+                <StackName>MongoDB</StackName>
               </StackList>
-              <Subheading>- Etc</Subheading>
+              <Subheading>ETC</Subheading>
               <StackList>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={awsIcon} alt="AWS" />
-                  </div>
-                  <div className="stack-name">AWS EC2</div>
-                </StackImg>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={gitIcon} alt="Git" />
-                  </div>
-                  <div className="stack-name">Git</div>
-                </StackImg>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={figmaIcon} alt="Figma" />
-                  </div>
-                  <div className="stack-name">Figma</div>
-                </StackImg>
+                <StackName>AWS EC2</StackName>
+                <StackName>Git</StackName>
+                <StackName>Figma</StackName>
               </StackList>
             </StackGroup>
             <StackGroup>
-              <Subheading>- BackEnd</Subheading>
+              <Subheading>BE</Subheading>
               <StackList>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={javaIcon} alt="Java" />
-                  </div>
-                  <div className="stack-name">Java</div>
-                </StackImg>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={pythonIcon} alt="Python" />
-                  </div>
-                  <div className="stack-name">Python</div>
-                </StackImg>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={springIcon} alt="Spring" />
-                  </div>
-                  <div className="stack-name">Spring</div>
-                </StackImg>
-                <StackImg style={{ opacity: 0 }}></StackImg>
+                <StackName>Java11</StackName>
+                <StackName>Python</StackName>
+                <StackName>Spring</StackName>
               </StackList>
-              <Subheading>- OS</Subheading>
+              <Subheading>OS</Subheading>
               <StackList>
-                <StackImg>
-                  <div className="stack-icon">
-                    <img src={linuxIcon} alt="LINUX" />
-                  </div>
-                  <div className="stack-name">Linux</div>
-                </StackImg>
+                <StackName>Linux</StackName>
               </StackList>
             </StackGroup>
           </StackSection>

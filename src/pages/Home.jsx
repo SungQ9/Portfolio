@@ -53,37 +53,57 @@ const SubText = styled(motion.h2)`
   }
 `;
 
-const NextButton = styled(motion.div)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
+const Cursor = styled(motion.div)`
+  position: relative;
+  bottom: -50%;
+  left: 50%;
+  width: 30px;
   height: 50px;
-  border: 1px solid #fff;
-  font-size: 1.5rem; // 버튼 내 글자 크기 조정
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 10; /* 상위에 위치하도록 z-index 설정 */
-  @media (max-width: 768px) {
-    font-size: 0.8rem; /* 화면이 작을 때 폰트 사이즈 조정 */
-    min-width: 80px; /* 화면이 작을 때 버튼 너비 조정 */
+  margin-left: -15px;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  box-sizing: border-box;
+`;
+
+const CursorBefore = styled(motion.div)`
+  position: relative;
+  top: 10px;
+  left: 50%;
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  background-color: #fff;
+  border-radius: 100%;
+  animation: sdb 1s infinite;
+  box-sizing: border-box;
+
+  @keyframes sdb {
+    0% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    40% {
+      opacity: 1;
+    }
+    80% {
+      transform: translate(0, 20px);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
   }
 `;
 
-function Home() {
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+function Home({ isVisible }) {
   return (
     <Container id="home">
       <motion.div
         className="home"
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        animate={isVisible ? "visible" : "hidden"}
         style={{ padding: "1rem" }}
       >
         <Text variants={childVariants} style={{ fontSize: "50px" }}>
@@ -92,15 +112,9 @@ function Home() {
         <SubText variants={childVariants} style={{ fontSize: "40px" }}>
           도전하는 개발자 이성규 입니다
         </SubText>
-
-        <NextButton
-          variants={childVariants}
-          whileHover={{ scale: 1.1 }} // 호버 시 버튼이 커지는 효과 추가
-          whileTap={{ scale: 0.95 }} // 탭(클릭) 시 버튼이 작아지는 효과 추가
-          onClick={() => scrollToSection("about")} // 클릭 시 /about 경로로 이동
-        >
-          Next
-        </NextButton>
+        <Cursor variants={childVariants}>
+          <CursorBefore />
+        </Cursor>
       </motion.div>
     </Container>
   );

@@ -30,6 +30,7 @@ const projects = [
     description: [
       "🏗️ 일정 :  24.01.05 ~ 24.01.31 ",
       "👥 인원 : 4명",
+      "📝 담당역할 ",
       "React 구조 설계 , WebRTC를 이용한 화상채팅 기능, 사용자 & 관리자 페이지 (Front),Front 전체 페이지 동작처리, Front 와 Back 연동, Linux서버 구축",
     ],
     skills: [
@@ -64,6 +65,7 @@ const projects = [
     description: [
       "🏗️ 일정 - 23.11.06 ~ 23.11.17 ",
       "👥 인원 - 4명",
+      "📝 담당역할 ",
       "DB설계, 사용자 페이지 전반, 장바구니 / 렌탈 신청 페이지/ 마이페이지, 제품검색 / 상세검색 기능 , 리뷰 CRUD, 문의 CRUD",
     ],
     skills: ["Spring", "Mybatis", "JQuery", "JSP"],

@@ -7,10 +7,11 @@ import Footer from "./Footer.jsx";
 import NavButton from "./NavButton.jsx";
 import { motion } from "framer-motion";
 
-const PageContainer = styled(motion.div)`
+const Container = styled(motion.div)`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 `;
 
 const ContentContainer = styled.div`
@@ -20,21 +21,29 @@ const ContentContainer = styled.div`
 
 function Wrapper() {
   const { theme } = useTheme();
+  const transition = {
+    duration: 0.5,
+    ease: "0.5s ease-in-out, color 0.5s ease-in-out",
+  };
+
   return (
-    <PageContainer
+    <Container
       animate={{
         backgroundColor: theme.backColor,
         color: theme.textColor,
-        transition: { duration: 1 },
       }}
+      transition={transition}
     >
-      <Header />
-      <ContentContainer>
+      <Header transition={transition} />
+      <ContentContainer
+        animate={{ backgroundColor: theme.backColor, color: theme.textColor }}
+        transition={transition}
+      >
         <Layout />
         <NavButton />
       </ContentContainer>
-      <Footer />
-    </PageContainer>
+      <Footer transition={transition} />
+    </Container>
   );
 }
 

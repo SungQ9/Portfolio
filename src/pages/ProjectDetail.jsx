@@ -153,7 +153,7 @@ const LinkContainer = styled.div`
 const IconImage = styled.img`
   width: 25px;
   height: 25px;
-  margin-right: 10px;
+  margin-right: 5px;
 `;
 
 function ProjectDetail({ project, onClose }) {
@@ -209,8 +209,9 @@ function ProjectDetail({ project, onClose }) {
                     href={project.docUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ fontSize: "12px" }}
                   >
-                    GoogleSlide
+                    프로젝트PPT
                   </a>
                 </LinkContainer>
               )}
@@ -222,8 +223,9 @@ function ProjectDetail({ project, onClose }) {
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ fontSize: "12px" }}
                   >
-                    Static Site
+                    사이트
                   </a>
                 </LinkContainer>
               )}
@@ -234,6 +236,7 @@ function ProjectDetail({ project, onClose }) {
                   href={project.gitUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  style={{ fontSize: "12px" }}
                 >
                   GitHub
                 </a>
