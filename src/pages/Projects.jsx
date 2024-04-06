@@ -117,7 +117,7 @@ function Projects({ isVisible }) {
       variants={containerVariants}
       initial="hidden"
       animate={isVisible ? "visible" : "hidden"}
-      style={{ background: "#fff" }}
+      style={{ background: "#fff", padding: "2%" }}
     >
       <Title> Projects</Title>
       <Container variants={childVariants}>
