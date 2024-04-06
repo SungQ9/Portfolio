@@ -7,7 +7,7 @@ import Projects from "../pages/Projects";
 
 const Container = styled.div`
   scroll-snap-type: y mandatory;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   scroll-behavior: smooth;
 `;
 
