@@ -49,7 +49,7 @@ const Title = styled.div`
   height: 30px;
   font-weight: 600;
   font-size: 20px;
-  margin: 0 0 0 3%;
+  margin: 0 0 0 5%;
   background-color: #000;
   color: #fff;
 `;
